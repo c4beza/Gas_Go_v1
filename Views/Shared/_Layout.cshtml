@@ -22,10 +22,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Find Gas", "Create", "UserSearchRequests")</li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Visit Gas Go Community", "", "")</li>
-                    }
+                    <li>@Html.ActionLink("Visit Gas Go Community", "Create", "Threads")</li>
+                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

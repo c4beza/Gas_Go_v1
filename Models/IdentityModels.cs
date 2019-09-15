@@ -18,7 +18,15 @@ namespace Gas_Go_v1.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationRole : IdentityRole
+    {
+        public ApplicationRole() : base() {}
+
+    public ApplicationRole(string roleName) : base(roleName) { }
+
+}
+
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -29,5 +37,6 @@ namespace Gas_Go_v1.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }
