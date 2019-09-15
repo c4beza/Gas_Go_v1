@@ -1,0 +1,51 @@
+﻿@model Gas_Go_v1.Models.RequestResult
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RequestResult</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ResultDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResultDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GasStations.GasStationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GasStations.GasStationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserSearchRequest.RequestKeyword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserSearchRequest.RequestKeyword)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ResultId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

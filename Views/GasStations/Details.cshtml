@@ -1,0 +1,131 @@
+﻿@model Gas_Go_v1.Models.GasStations
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GasStations</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GasStationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GasStationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Suburb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suburb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnleadedPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnleadedPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnleadedPriceUpdatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnleadedPriceUpdatedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premium95Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premium95Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premium95PriceUpdatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premium95PriceUpdatedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premium98Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premium98Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premium98PriceUpdatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premium98PriceUpdatedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DieselPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DieselPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DieselPriceUpdatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DieselPriceUpdatedTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GasStationId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

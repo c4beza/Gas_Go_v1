@@ -1,0 +1,527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GasStations">
+          <Key>
+            <PropertyRef Name="GasStationId" />
+          </Key>
+          <Property Name="GasStationId" Type="int" Nullable="false" />
+          <Property Name="GasStationName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Street" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Suburb" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Longitude" Type="numeric" Precision="10" Scale="7" Nullable="false" />
+          <Property Name="Latitude" Type="numeric" Precision="10" Scale="7" Nullable="false" />
+          <Property Name="UnleadedPrice" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="UnleadedPriceUpdatedTime" Type="datetime" />
+          <Property Name="Premium95Price" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Premium95PriceUpdatedTime" Type="datetime" />
+          <Property Name="Premium98Price" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Premium98PriceUpdatedTime" Type="datetime" />
+          <Property Name="DieselPrice" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DieselPriceUpdatedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ThreadID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestResult">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResultDateTime" Type="datetime" Nullable="false" />
+          <Property Name="RequestID" Type="int" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="GasStationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Thread">
+          <Key>
+            <PropertyRef Name="ThreadId" />
+          </Key>
+          <Property Name="ThreadId" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSearchRequest">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestDateTime" Type="datetime" Nullable="false" />
+          <Property Name="RequestKeyword" Type="varchar" MaxLength="250" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Post__ThreadID__4D94879B">
+          <End Role="Thread" Type="Self.Thread" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thread">
+              <PropertyRef Name="ThreadId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="ThreadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__UserID__4E88ABD4">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestRe__GasSt__45F365D3">
+          <End Role="GasStations" Type="Self.GasStations" Multiplicity="1" />
+          <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GasStations">
+              <PropertyRef Name="GasStationId" />
+            </Principal>
+            <Dependent Role="RequestResult">
+              <PropertyRef Name="GasStationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestRe__Reque__44FF419A">
+          <End Role="UserSearchRequest" Type="Self.UserSearchRequest" Multiplicity="0..1" />
+          <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSearchRequest">
+              <PropertyRef Name="RequestId" />
+            </Principal>
+            <Dependent Role="RequestResult">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestRe__UserI__440B1D61">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestResult">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Thread__UserID__4AB81AF0">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Thread" Type="Self.Thread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Thread">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserSearc__UserI__46E78A0C">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserSearchRequest" Type="Self.UserSearchRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSearchRequest">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GasStations" EntityType="Self.GasStations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestResult" EntityType="Self.RequestResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thread" EntityType="Self.Thread" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSearchRequest" EntityType="Self.UserSearchRequest" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Post__ThreadID__4D94879B" Association="Self.FK__Post__ThreadID__4D94879B">
+            <End Role="Thread" EntitySet="Thread" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__UserID__4E88ABD4" Association="Self.FK__Post__UserID__4E88ABD4">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestRe__GasSt__45F365D3" Association="Self.FK__RequestRe__GasSt__45F365D3">
+            <End Role="GasStations" EntitySet="GasStations" />
+            <End Role="RequestResult" EntitySet="RequestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestRe__Reque__44FF419A" Association="Self.FK__RequestRe__Reque__44FF419A">
+            <End Role="UserSearchRequest" EntitySet="UserSearchRequest" />
+            <End Role="RequestResult" EntitySet="RequestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestRe__UserI__440B1D61" Association="Self.FK__RequestRe__UserI__440B1D61">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RequestResult" EntitySet="RequestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Thread__UserID__4AB81AF0" Association="Self.FK__Thread__UserID__4AB81AF0">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Thread" EntitySet="Thread" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserSearc__UserI__46E78A0C" Association="Self.FK__UserSearc__UserI__46E78A0C">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserSearchRequest" EntitySet="UserSearchRequest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Post__UserID__4E88ABD4" FromRole="AspNetUsers" ToRole="Post" />
+          <NavigationProperty Name="RequestResult" Relationship="Self.FK__RequestRe__UserI__440B1D61" FromRole="AspNetUsers" ToRole="RequestResult" />
+          <NavigationProperty Name="Thread" Relationship="Self.FK__Thread__UserID__4AB81AF0" FromRole="AspNetUsers" ToRole="Thread" />
+          <NavigationProperty Name="UserSearchRequest" Relationship="Self.FK__UserSearc__UserI__46E78A0C" FromRole="AspNetUsers" ToRole="UserSearchRequest" />
+        </EntityType>
+        <EntityType Name="GasStations">
+          <Key>
+            <PropertyRef Name="GasStationId" />
+          </Key>
+          <Property Name="GasStationId" Type="Int32" Nullable="false" />
+          <Property Name="GasStationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="10" Scale="7" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="10" Scale="7" Nullable="false" />
+          <Property Name="UnleadedPrice" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="UnleadedPriceUpdatedTime" Type="DateTime" Precision="3" />
+          <Property Name="Premium95Price" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Premium95PriceUpdatedTime" Type="DateTime" Precision="3" />
+          <Property Name="Premium98Price" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Premium98PriceUpdatedTime" Type="DateTime" Precision="3" />
+          <Property Name="DieselPrice" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DieselPriceUpdatedTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RequestResult" Relationship="Self.FK__RequestRe__GasSt__45F365D3" FromRole="GasStations" ToRole="RequestResult" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThreadID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Post__UserID__4E88ABD4" FromRole="Post" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Thread" Relationship="Self.FK__Post__ThreadID__4D94879B" FromRole="Post" ToRole="Thread" />
+        </EntityType>
+        <EntityType Name="RequestResult">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResultDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RequestID" Type="Int32" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GasStationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__RequestRe__UserI__440B1D61" FromRole="RequestResult" ToRole="AspNetUsers" />
+          <NavigationProperty Name="GasStations" Relationship="Self.FK__RequestRe__GasSt__45F365D3" FromRole="RequestResult" ToRole="GasStations" />
+          <NavigationProperty Name="UserSearchRequest" Relationship="Self.FK__RequestRe__Reque__44FF419A" FromRole="RequestResult" ToRole="UserSearchRequest" />
+        </EntityType>
+        <EntityType Name="Thread">
+          <Key>
+            <PropertyRef Name="ThreadId" />
+          </Key>
+          <Property Name="ThreadId" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Thread__UserID__4AB81AF0" FromRole="Thread" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Post__ThreadID__4D94879B" FromRole="Thread" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="UserSearchRequest">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RequestKeyword" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__UserSearc__UserI__46E78A0C" FromRole="UserSearchRequest" ToRole="AspNetUsers" />
+          <NavigationProperty Name="RequestResult" Relationship="Self.FK__RequestRe__Reque__44FF419A" FromRole="UserSearchRequest" ToRole="RequestResult" />
+        </EntityType>
+        <Association Name="FK__Post__UserID__4E88ABD4">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestRe__UserI__440B1D61">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestResult">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Thread__UserID__4AB81AF0">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Thread" Type="Self.Thread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Thread">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserSearc__UserI__46E78A0C">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserSearchRequest" Type="Self.UserSearchRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSearchRequest">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestRe__GasSt__45F365D3">
+          <End Role="GasStations" Type="Self.GasStations" Multiplicity="1" />
+          <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GasStations">
+              <PropertyRef Name="GasStationId" />
+            </Principal>
+            <Dependent Role="RequestResult">
+              <PropertyRef Name="GasStationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__ThreadID__4D94879B">
+          <End Role="Thread" Type="Self.Thread" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thread">
+              <PropertyRef Name="ThreadId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="ThreadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestRe__Reque__44FF419A">
+          <End Role="UserSearchRequest" Type="Self.UserSearchRequest" Multiplicity="0..1" />
+          <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSearchRequest">
+              <PropertyRef Name="RequestId" />
+            </Principal>
+            <Dependent Role="RequestResult">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="GasStations" EntityType="Self.GasStations" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="RequestResult" EntityType="Self.RequestResult" />
+          <EntitySet Name="Thread" EntityType="Self.Thread" />
+          <EntitySet Name="UserSearchRequest" EntityType="Self.UserSearchRequest" />
+          <AssociationSet Name="FK__Post__UserID__4E88ABD4" Association="Self.FK__Post__UserID__4E88ABD4">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestRe__UserI__440B1D61" Association="Self.FK__RequestRe__UserI__440B1D61">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RequestResult" EntitySet="RequestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Thread__UserID__4AB81AF0" Association="Self.FK__Thread__UserID__4AB81AF0">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Thread" EntitySet="Thread" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserSearc__UserI__46E78A0C" Association="Self.FK__UserSearc__UserI__46E78A0C">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserSearchRequest" EntitySet="UserSearchRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestRe__GasSt__45F365D3" Association="Self.FK__RequestRe__GasSt__45F365D3">
+            <End Role="GasStations" EntitySet="GasStations" />
+            <End Role="RequestResult" EntitySet="RequestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__ThreadID__4D94879B" Association="Self.FK__Post__ThreadID__4D94879B">
+            <End Role="Thread" EntitySet="Thread" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestRe__Reque__44FF419A" Association="Self.FK__RequestRe__Reque__44FF419A">
+            <End Role="UserSearchRequest" EntitySet="UserSearchRequest" />
+            <End Role="RequestResult" EntitySet="RequestResult" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GasStations">
+            <EntityTypeMapping TypeName="Model.GasStations">
+              <MappingFragment StoreEntitySet="GasStations">
+                <ScalarProperty Name="GasStationId" ColumnName="GasStationId" />
+                <ScalarProperty Name="GasStationName" ColumnName="GasStationName" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="UnleadedPrice" ColumnName="UnleadedPrice" />
+                <ScalarProperty Name="UnleadedPriceUpdatedTime" ColumnName="UnleadedPriceUpdatedTime" />
+                <ScalarProperty Name="Premium95Price" ColumnName="Premium95Price" />
+                <ScalarProperty Name="Premium95PriceUpdatedTime" ColumnName="Premium95PriceUpdatedTime" />
+                <ScalarProperty Name="Premium98Price" ColumnName="Premium98Price" />
+                <ScalarProperty Name="Premium98PriceUpdatedTime" ColumnName="Premium98PriceUpdatedTime" />
+                <ScalarProperty Name="DieselPrice" ColumnName="DieselPrice" />
+                <ScalarProperty Name="DieselPriceUpdatedTime" ColumnName="DieselPriceUpdatedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="Model.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ThreadID" ColumnName="ThreadID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestResult">
+            <EntityTypeMapping TypeName="Model.RequestResult">
+              <MappingFragment StoreEntitySet="RequestResult">
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+                <ScalarProperty Name="ResultDateTime" ColumnName="ResultDateTime" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GasStationID" ColumnName="GasStationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thread">
+            <EntityTypeMapping TypeName="Model.Thread">
+              <MappingFragment StoreEntitySet="Thread">
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSearchRequest">
+            <EntityTypeMapping TypeName="Model.UserSearchRequest">
+              <MappingFragment StoreEntitySet="UserSearchRequest">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDateTime" ColumnName="RequestDateTime" />
+                <ScalarProperty Name="RequestKeyword" ColumnName="RequestKeyword" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

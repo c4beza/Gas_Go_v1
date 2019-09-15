@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19545df705f048b98712d871681667ec" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GasStations" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Post" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RequestResult" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Thread" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserSearchRequest" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Post__UserID__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__RequestRe__UserI__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Thread__UserID__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__UserSearc__UserI__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__RequestRe__GasSt__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Post__ThreadID__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__RequestRe__Reque__44FF419A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

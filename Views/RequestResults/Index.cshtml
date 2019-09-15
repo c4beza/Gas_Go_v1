@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Gas_Go_v1.Models.RequestResult>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GasStations.GasStationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserSearchRequest.RequestKeyword)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResultDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GasStations.GasStationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserSearchRequest.RequestKeyword)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResultId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResultId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResultId })
+        </td>
+    </tr>
+}
+
+</table>

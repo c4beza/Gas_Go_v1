@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Gas_Go_v1.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thread.Subject)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thread.Subject)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PostId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PostId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PostId })
+        </td>
+    </tr>
+}
+
+</table>

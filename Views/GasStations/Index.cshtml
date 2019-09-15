@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Gas_Go_v1.Models.GasStations>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GasStationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Suburb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnleadedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnleadedPriceUpdatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Premium95Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Premium95PriceUpdatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Premium98Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Premium98PriceUpdatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DieselPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DieselPriceUpdatedTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GasStationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suburb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnleadedPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnleadedPriceUpdatedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Premium95Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Premium95PriceUpdatedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Premium98Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Premium98PriceUpdatedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DieselPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DieselPriceUpdatedTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GasStationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GasStationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GasStationId })
+        </td>
+    </tr>
+}
+
+</table>
