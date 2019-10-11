@@ -4,12 +4,22 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/Site.css" rel="stylesheet" />
 
-<h2>Index</h2>
+
+<h2></h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<picture>
+    <source media="(min-width: 1300px)" srcset="/images/patrol-station-1280.jpg">
+    <source media="(min-width: 660px)" srcset="/images/patrol-station-640.jpg">
+    <source media="(min-width: 340px)" srcset="/images/patrol-station-320.jpg">
+    <img src="/images/patrol-station-320.jpg" alt="a patrol station at night" style="width:auto;">
+</picture>
+
 <table class="table">
     <tr>
         <th>

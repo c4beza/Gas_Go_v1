@@ -155,6 +155,7 @@ namespace Gas_Go_v1.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            RegisterViewModel model = new RegisterViewModel();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (var role in RoleManager.Roles)
                 list.Add(new SelectListItem() { Value = role.Name, Text = role.Name});

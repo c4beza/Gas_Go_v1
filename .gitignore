@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/uploads/MongoDb_command.txt
+/uploads/29182085_Rscript.R
