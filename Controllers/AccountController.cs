@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Gas_Go_v1.Models;
 using System.Collections.Generic;
+using RazorEngine.Templating;
+using Gas_Go_v1.Services;
 
 namespace Gas_Go_v1.Controllers
 {
@@ -178,7 +180,12 @@ namespace Gas_Go_v1.Controllers
                 {
                     result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    String toEmail = model.Email;
+                    String subject = "Welcome to join Gas Go!";
+                    String contents = "Hi";
+                    EmailSender es = new EmailSender();
+                    es.Send(toEmail, subject, contents, null, null);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

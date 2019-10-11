@@ -29,7 +29,6 @@ namespace Gas_Go_v1.Controllers
                     String subject = model.Subject;
                     String contents = model.Contents;
                     HttpPostedFileBase postedFile = model.Upload;
-                    String fileName = Path.GetFileName(postedFile.FileName);
                     String fileAddress;
                     EmailSender es = new EmailSender();
 
@@ -40,6 +39,8 @@ namespace Gas_Go_v1.Controllers
                         {
                             Directory.CreateDirectory(path);
                         }
+
+                        String fileName = Path.GetFileName(postedFile.FileName);
                         fileAddress = path + fileName;
                         postedFile.SaveAs(fileAddress);
                         ViewBag.Message = "File uploaded successfully.";
