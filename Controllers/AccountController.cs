@@ -180,11 +180,9 @@ namespace Gas_Go_v1.Controllers
                 {
                     result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    String toEmail = model.Email;
-                    String subject = "Welcome to join Gas Go!";
-                    String contents = "Hi";
+                    String toEmail = "haoranju0514@gmail.com";
                     EmailSender es = new EmailSender();
-                    es.Send(toEmail, subject, contents, null, null);
+                    es.SendWithTemplate(toEmail);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
