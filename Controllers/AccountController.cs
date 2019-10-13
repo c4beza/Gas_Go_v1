@@ -211,6 +211,7 @@ namespace Gas_Go_v1.Controllers
                 body = reader.ReadToEnd();
             }
             body = body.Replace("{username}",model.UserName);
+            body = body.Replace("{email}", model.Email);
             return body;
         }
 

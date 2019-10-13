@@ -43,7 +43,6 @@ namespace Gas_Go_v1.Controllers
                         String fileName = Path.GetFileName(postedFile.FileName);
                         fileAddress = path + fileName;
                         postedFile.SaveAs(fileAddress);
-                        ViewBag.Message = "File uploaded successfully.";
                         es.Send(toEmail, subject, contents, fileAddress, fileName);
                     }
                     if (postedFile == null)
@@ -64,6 +63,46 @@ namespace Gas_Go_v1.Controllers
                 }
             }
             return View();
+        }
+
+        
+        public ActionResult Upload_File()
+        {
+            return View(new SendEmailViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Upload_File(SendEmailViewModel model)
+        {
+
+                try
+                {
+                    HttpPostedFileBase postedFile = model.Upload;
+                    String fileAddress;
+
+                    if (postedFile != null)
+                    {
+                        string path = Server.MapPath("~/Uploads/");
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+
+                        String fileName = Path.GetFileName(postedFile.FileName);
+                        fileAddress = path + fileName;
+                        postedFile.SaveAs(fileAddress);
+                        ViewBag.Result = "File uploaded successfully.";
+                    }
+                    ModelState.Clear();
+
+                    return View(new SendEmailViewModel());
+
+
+                }
+                catch
+                {
+                    return View();
+                }
         }
     }
 }

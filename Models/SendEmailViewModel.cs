@@ -20,6 +20,5 @@ namespace Gas_Go_v1.Models
         public string Contents { get; set; }
 
         public HttpPostedFileBase Upload { get; set; }
-
     }
 }
