@@ -288,6 +288,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="App_Data\aspnet-Gas_Go_v1-20190906033826.mdf" />
     <Content Include="App_Data\aspnet-Gas_Go_v1-20190906033826_log.ldf">
       <DependentUpon>aspnet-Gas_Go_v1-20190906033826.mdf</DependentUpon>

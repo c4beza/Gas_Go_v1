@@ -12,6 +12,7 @@ using Gas_Go_v1.Models;
 using System.Collections.Generic;
 using RazorEngine.Templating;
 using Gas_Go_v1.Services;
+using System.IO;
 
 namespace Gas_Go_v1.Controllers
 {
@@ -180,9 +181,12 @@ namespace Gas_Go_v1.Controllers
                 {
                     result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    String toEmail = "haoranju0514@gmail.com";
+                    String body = CreateBody(model);
+                    String subject = "Welcome to join Gas Go!";
+                    String toEmail = model.Email;
+                    String fromEmail = "noreply@gasgo.com";
                     EmailSender es = new EmailSender();
-                    es.SendWithTemplate(toEmail);
+                    es.SendWithTemplate(toEmail,fromEmail,subject, body);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -197,6 +201,17 @@ namespace Gas_Go_v1.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public string CreateBody(RegisterViewModel model)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTemplate/template1.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{username}",model.UserName);
+            return body;
         }
 
         //
