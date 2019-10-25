@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Gas_Go_v1.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Gas_Go_v1.Controllers
 {
@@ -17,8 +18,37 @@ namespace Gas_Go_v1.Controllers
         // GET: RequestResults
         public ActionResult Index()
         {
-            var requestResult = db.RequestResult.Include(r => r.GasStations).Include(r => r.UserSearchRequest);
-            return View(requestResult.ToList());
+            if (User.Identity.GetUserId() != null)
+            {
+                int requestId;
+                if (TempData["keyword"] == null)
+                {
+                    var requestResult = db.GasStations;
+                    return View(requestResult.ToList());
+                }
+                else
+                {
+                    String keyword = TempData["keyword"] as string;
+                    requestId = int.Parse(TempData["requestId"].ToString());
+                    var result = db.GasStations.Where(x => x.GasStationName.Contains(keyword));
+                    var requestResult = new RequestResult
+                    {
+                        RequestID = requestId,
+                        UserID = User.Identity.GetUserId(),
+                        ResultDateTime = DateTime.Now,
+                        GasStationID = 1,
+                    };
+                    db.RequestResult.Add(requestResult);
+                    db.SaveChanges();
+                    return View(result.ToList());
+                }
+            }
+            else
+            {
+                String keyword = TempData["keyword"] as string;
+                var result = db.GasStations.Where(x => x.GasStationName.Contains(keyword));
+                return View(result.ToList());
+            }
         }
 
         // GET: RequestResults/Details/5

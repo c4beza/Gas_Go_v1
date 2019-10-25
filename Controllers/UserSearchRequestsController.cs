@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Gas_Go_v1.Models;
+using WebMatrix.WebData;
+using Microsoft.AspNet.Identity;
+
 
 namespace Gas_Go_v1.Controllers
 {
@@ -38,6 +41,7 @@ namespace Gas_Go_v1.Controllers
         // GET: UserSearchRequests/Create
         public ActionResult Create()
         {
+            UserSearchRequestsViewModel model = new UserSearchRequestsViewModel();
             return View();
         }
 
@@ -46,16 +50,36 @@ namespace Gas_Go_v1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RequestId,RequestDateTime,RequestKeyword,UserID")] UserSearchRequest userSearchRequest)
+        public ActionResult Create(UserSearchRequestsViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.UserSearchRequest.Add(userSearchRequest);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                if (User.Identity.GetUserId() != null)
+                {
+                    var searchRequest = new UserSearchRequest
+                    {
+                        RequestKeyword = model.RequestKeyword,
+                        UserID = User.Identity.GetUserId(),
+                        RequestDateTime = DateTime.Now
+                    };
+                    db.UserSearchRequest.Add(searchRequest);
+                    db.SaveChanges();
+                    String keyword = model.RequestKeyword;
+                    TempData["keyword"] = keyword;
+                    int requestId = searchRequest.RequestId;
+                    TempData["RequestId"] = requestId;
+                    return RedirectToAction("Index", "RequestResults");
+                }
+                else
+                {
+                    String keyword = model.RequestKeyword;
+                    TempData["keyword"] = keyword;
+                    return RedirectToAction("Index", "RequestResults");
+                }
             }
 
-            return View(userSearchRequest);
+            return View(model);
         }
 
         // GET: UserSearchRequests/Edit/5

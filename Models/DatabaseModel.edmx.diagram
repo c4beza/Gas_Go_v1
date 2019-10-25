@@ -18,6 +18,13 @@
         <AssociationConnector Association="Model.FK__RequestRe__GasSt__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Post__ThreadID__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__RequestRe__Reque__44FF419A" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="3" PointY="16.875" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

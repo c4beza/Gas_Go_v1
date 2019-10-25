@@ -1,52 +1,60 @@
-﻿@model IEnumerable<Gas_Go_v1.Models.RequestResult>
+﻿@model IEnumerable<Gas_Go_v1.Models.GasStations>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your search result";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+    <div>
+        @Html.ActionLink("Back", "Create", "UserSearchRequests")
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ResultDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GasStations.GasStationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserSearchRequest.RequestKeyword)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.GasStationId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GasStationName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Suburb)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Street)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="3" style="color:red">
+                        No match any gas station!
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.GasStationId
+                        </td>
+                        <td>
+                            @item.GasStationName
+                        </td>
+                        <td>
+                            @item.Suburb
+                        </td>
+                        <td>
+                            @item.Street
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ResultDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GasStations.GasStationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserSearchRequest.RequestKeyword)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ResultId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ResultId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ResultId })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>

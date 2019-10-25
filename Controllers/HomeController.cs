@@ -10,6 +10,8 @@ namespace Gas_Go_v1.Controllers
 {
     public class HomeController : Controller
     {
+
+
         public ActionResult Index()
         {
             return View();

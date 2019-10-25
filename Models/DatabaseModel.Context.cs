@@ -31,5 +31,9 @@ namespace Gas_Go_v1.Models
         public virtual DbSet<RequestResult> RequestResult { get; set; }
         public virtual DbSet<Thread> Thread { get; set; }
         public virtual DbSet<UserSearchRequest> UserSearchRequest { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
     }
 }
