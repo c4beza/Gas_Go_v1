@@ -19,10 +19,37 @@
                     @Html.DisplayNameFor(model => model.GasStationName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Suburb)
+                    @Html.DisplayNameFor(model => model.Rating)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Street)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Suburb)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnleadedPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnleadedPriceUpdatedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Premium95Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Premium95PriceUpdatedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Premium98Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Premium98PriceUpdatedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DieselPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DieselPriceUpdatedTime)
                 </th>
             </tr>
         </thead>
@@ -39,20 +66,47 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @item.GasStationId
-                        </td>
-                        <td>
-                            @item.GasStationName
-                        </td>
-                        <td>
-                            @item.Suburb
-                        </td>
-                        <td>
-                            @item.Street
-                        </td>
-                    </tr>
+        <tr>
+            <td>
+                @item.GasStationId
+            </td>
+            <td>
+                @item.GasStationName
+            </td>
+            <td>
+                @item.Rating
+            </td>
+            <td>
+                @item.Street
+            </td>
+            <td>
+                @item.Suburb
+            </td>
+            <td>
+                @item.UnleadedPrice
+            </td>
+            <td>
+                @item.UnleadedPriceUpdatedTime
+            </td>
+            <td>
+                @item.Premium95Price
+            </td>
+            <td>
+                @item.Premium95PriceUpdatedTime
+            </td>
+            <td>
+                @item.Premium98Price
+            </td>
+            <td>
+                @item.Premium98PriceUpdatedTime
+            </td>
+            <td>
+                @item.DieselPrice
+            </td>
+            <td>
+                @item.DieselPriceUpdatedTime
+            </td>
+        </tr>
                 }
             }
         </tbody>

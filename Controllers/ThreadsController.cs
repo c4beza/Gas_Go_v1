@@ -7,15 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Gas_Go_v1.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Gas_Go_v1.Controllers
 {
+    [Authorize]
     public class ThreadsController : Controller
     {
         private Entities1 db = new Entities1();
 
         // GET: Threads
         public ActionResult Index()
+        {
+            var thread = db.Thread.Include(t => t.AspNetUsers);
+            return View(thread.ToList());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminIndex()
         {
             var thread = db.Thread.Include(t => t.AspNetUsers);
             return View(thread.ToList());
@@ -48,19 +57,25 @@ namespace Gas_Go_v1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ThreadId,Subject,CreatedTime,UserID")] Thread thread)
+        public ActionResult Create(ThreadsViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var thread = new Thread
+                {
+                    UserID = User.Identity.GetUserId(),
+                    Subject = model.Subject,
+                    CreatedTime = DateTime.Now,
+                    
+                };
                 db.Thread.Add(thread);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", thread.UserID);
-            return View(thread);
+            return View();
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Threads/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,10 +88,11 @@ namespace Gas_Go_v1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", thread.UserID);
+            
             return View(thread);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Threads/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -88,12 +104,13 @@ namespace Gas_Go_v1.Controllers
             {
                 db.Entry(thread).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminIndex");
             }
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", thread.UserID);
             return View(thread);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Threads/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -109,6 +126,7 @@ namespace Gas_Go_v1.Controllers
             return View(thread);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Threads/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -117,7 +135,7 @@ namespace Gas_Go_v1.Controllers
             Thread thread = db.Thread.Find(id);
             db.Thread.Remove(thread);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AdminIndex");
         }
 
         protected override void Dispose(bool disposing)

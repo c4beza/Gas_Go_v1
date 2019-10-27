@@ -91,7 +91,7 @@
           <Key>
             <PropertyRef Name="PostId" />
           </Key>
-          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content" Type="varchar(max)" Nullable="false" />
           <Property Name="CreatedTime" Type="datetime" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -111,7 +111,7 @@
           <Key>
             <PropertyRef Name="ThreadId" />
           </Key>
-          <Property Name="ThreadId" Type="int" Nullable="false" />
+          <Property Name="ThreadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Subject" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CreatedTime" Type="datetime" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -125,7 +125,7 @@
           <Property Name="RequestKeyword" Type="varchar" MaxLength="250" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Post__ThreadID__4D94879B">
+        <Association Name="FK__Post__ThreadID__160F4887">
           <End Role="Thread" Type="Self.Thread" Multiplicity="1" />
           <End Role="Post" Type="Self.Post" Multiplicity="*" />
           <ReferentialConstraint>
@@ -137,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Post__UserID__4E88ABD4">
+        <Association Name="FK__Post__UserID__17036CC0">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Post" Type="Self.Post" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,18 +149,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      <Association Name="FK__RequestRe__GasSt__45F365D3">
-        <End Role="GasStations" Type="Self.GasStations" Multiplicity="1" />
-        <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
-        <ReferentialConstraint>
-          <Principal Role="GasStations">
-            <PropertyRef Name="GasStationId" />
-          </Principal>
-          <Dependent Role="RequestResult">
-            <PropertyRef Name="GasStationID" />
-          </Dependent>
-        </ReferentialConstraint>
-      </Association>
+        <Association Name="FK__RequestRe__GasSt__6E01572D">
+          <End Role="GasStations" Type="Self.GasStations" Multiplicity="1" />
+          <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GasStations">
+              <PropertyRef Name="GasStationId" />
+            </Principal>
+            <Dependent Role="RequestResult">
+              <PropertyRef Name="GasStationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__RequestRe__Reque__44FF419A">
           <End Role="UserSearchRequest" Type="Self.UserSearchRequest" Multiplicity="0..1" />
           <End Role="RequestResult" Type="Self.RequestResult" Multiplicity="*" />
@@ -185,7 +185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Thread__UserID__4AB81AF0">
+        <Association Name="FK__Thread__UserID__02FC7413">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Thread" Type="Self.Thread" Multiplicity="*" />
           <ReferentialConstraint>
@@ -277,15 +277,15 @@
           <EntitySet Name="RequestResult" EntityType="Self.RequestResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Thread" EntityType="Self.Thread" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSearchRequest" EntityType="Self.UserSearchRequest" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Post__ThreadID__4D94879B" Association="Self.FK__Post__ThreadID__4D94879B">
+          <AssociationSet Name="FK__Post__ThreadID__160F4887" Association="Self.FK__Post__ThreadID__160F4887">
             <End Role="Thread" EntitySet="Thread" />
             <End Role="Post" EntitySet="Post" />
           </AssociationSet>
-          <AssociationSet Name="FK__Post__UserID__4E88ABD4" Association="Self.FK__Post__UserID__4E88ABD4">
+          <AssociationSet Name="FK__Post__UserID__17036CC0" Association="Self.FK__Post__UserID__17036CC0">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Post" EntitySet="Post" />
           </AssociationSet>
-          <AssociationSet Name="FK__RequestRe__GasSt__45F365D3" Association="Self.FK__RequestRe__GasSt__45F365D3">
+          <AssociationSet Name="FK__RequestRe__GasSt__6E01572D" Association="Self.FK__RequestRe__GasSt__6E01572D">
             <End Role="GasStations" EntitySet="GasStations" />
             <End Role="RequestResult" EntitySet="RequestResult" />
           </AssociationSet>
@@ -297,7 +297,7 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="RequestResult" EntitySet="RequestResult" />
           </AssociationSet>
-          <AssociationSet Name="FK__Thread__UserID__4AB81AF0" Association="Self.FK__Thread__UserID__4AB81AF0">
+          <AssociationSet Name="FK__Thread__UserID__02FC7413" Association="Self.FK__Thread__UserID__02FC7413">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Thread" EntitySet="Thread" />
           </AssociationSet>
@@ -322,8 +322,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
 
     <!-- CSDL content -->
     <edmx:ConceptualModels>

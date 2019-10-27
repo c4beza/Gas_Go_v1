@@ -15,6 +15,6 @@ namespace Gas_Go_v1.Controllers
         public ActionResult Index()
         {
             return View();
-        }   
+        }
     }
 }

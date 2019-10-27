@@ -1,6 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+    <picture>
+        <source media="(min-width: 1300px)" srcset="/images/patrol-station-1280.jpg">
+        <source media="(min-width: 660px)" srcset="/images/patrol-station-640.jpg">
+        <source media="(min-width: 340px)" srcset="/images/patrol-station-320.jpg">
+        <img src="/images/patrol-station-320.jpg" alt="a patrol station at night" style="width:auto;">
+    </picture>
 
 <div class="jumbotron">
     <h1>Gas Go!</h1>
@@ -10,14 +16,12 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h1>Search cheap gas by suburb</h1>
-        <p>
-            Find the best gas prices in your state to maximize savings at the pump.
-        </p>
-        <form action="">
-            <input type="text" name="Suburb" value="Search gas prices by suburb">
-            <input type="submit" value="Find Gas!">
-        </form>
+        <h1>Search cheap gas by suburb.</h1>
+        <h1>
+            Find the best gas prices in your state to maximize savings at the pump.<br />
+            @Html.ActionLink("Find Gas!", "Create", "UserSearchRequests")
+        </h1>
+
     </div>
     <div class="col-md-6">
         <h2>View gas price map</h2>
@@ -30,3 +34,4 @@
         <p><a class="btn btn-default" href="">Visit now &raquo;</a></p>
     </div>
 </div>
+

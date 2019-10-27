@@ -11,8 +11,9 @@ namespace Gas_Go_v1.Models
 
     public class UserSearchRequestsViewModel
     {
-            [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]  
-            [Display(Name = "")]
+            [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            
+            [Display(Name = "The name of the gas station")]
             public string RequestKeyword { get; set; }
     }
 }
